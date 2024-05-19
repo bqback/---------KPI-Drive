@@ -2,6 +2,8 @@ package apperrors
 
 import "errors"
 
+// Привычка определять внутренние ошибки в отдельном модуле
+
 var (
 	ErrEnvNotFound        = errors.New("unable to load .env file")
 	ErrSaveURLMissing     = errors.New("save fact URL missing from .env file")

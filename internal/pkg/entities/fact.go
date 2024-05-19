@@ -14,10 +14,12 @@ type Fact struct {
 }
 
 type GeneratorPreset struct {
-	PeriodStart string
-	PeriodEnd   string
-	PeriodKey   string
-	MoID        string
-	IsPlan      string
-	AuthUserID  string
+	Facts       int    `yaml:"facts"`
+	PeriodStart string `yaml:"period_start"`
+	PeriodEnd   string `yaml:"period_end"`
+	PeriodKey   string `yaml:"period_key"`
+	MoID        string `yaml:"mo_id"`
+	MoFactID    string `yaml:"mo_fact_id"`
+	IsPlan      string `yaml:"is_plan"`
+	AuthUserID  string `yaml:"-"`
 }

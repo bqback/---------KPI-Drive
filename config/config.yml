@@ -1,24 +1,19 @@
 # config.yml
 
-# api:
-#   port: 8000
-#   host: api
-
-# file_attack:
-#   dir: "file_attack"
-#   dict_file: "dict.txt" 
-
-# proxy:
-#   port: 8080
-#   host: proxy
-
-# db:
-#   user: postgres
-#   port: 5432
-#   db_name: ProxyStorage
-#   app_name: ProxyStorage
-#   schema: public
-#   connection_timeout: 5
+app:
+  date_layout: "2006-01-02"
+  # Число одновременных запросов к серверу, по заданию равно 1
+  max_requests: 1
+  generator_preset:
+    # Число генерируемых фактов для теста
+    facts: 10
+    # Данные из задания
+    period_start: "2024-05-01"
+	  period_end: "2024-05-31"
+	  period_key: "month"
+	  mo_id: "227373"
+	  mo_fact_id: "0"
+	  is_plan: "0"
 
 logging:
   # Accepted levels: trace, debug, info, warning, error
@@ -30,13 +25,3 @@ logging:
   level_based_report: true
   report_caller: true
   disable_level_truncation: true
-
-# tls:
-#   dir: ".tls"
-#   cert_dir: "certs"
-#   key_dir: "keys"
-#   age_years: 10
-#   x509_config: "x509.conf"
-#   ca_key: "proxy-serv-ca.key"
-#   ca_cert: "proxy-serv-ca.crt"
-#   cert_gen: "gen_cert.sh"
