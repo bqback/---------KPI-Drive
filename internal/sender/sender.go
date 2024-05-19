@@ -68,6 +68,8 @@ func (s *Sender) formRequest(fact entities.Fact, out chan *http.Request, i, tota
 	if err != nil {
 		s.logger.Error(fmt.Sprintf("Error processing fact %d: %s", i+1, err.Error()))
 	}
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	request.Header.Add("Authorization", "Bearer "+s.Token)
 	out <- request
 	s.logger.Debug(fmt.Sprintf("Done processing fact %d", i+1))
 }
