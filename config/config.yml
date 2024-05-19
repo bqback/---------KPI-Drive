@@ -1,0 +1,42 @@
+# config.yml
+
+# api:
+#   port: 8000
+#   host: api
+
+# file_attack:
+#   dir: "file_attack"
+#   dict_file: "dict.txt" 
+
+# proxy:
+#   port: 8080
+#   host: proxy
+
+# db:
+#   user: postgres
+#   port: 5432
+#   db_name: ProxyStorage
+#   app_name: ProxyStorage
+#   schema: public
+#   connection_timeout: 5
+
+logging:
+  # Accepted levels: trace, debug, info, warning, error
+  level: debug
+  disable_timestamp: false
+  full_timestamp: true
+  # If true, report_caller setting will be based on level being trace
+  # If false, report_caller setting will use the config value
+  level_based_report: true
+  report_caller: true
+  disable_level_truncation: true
+
+# tls:
+#   dir: ".tls"
+#   cert_dir: "certs"
+#   key_dir: "keys"
+#   age_years: 10
+#   x509_config: "x509.conf"
+#   ca_key: "proxy-serv-ca.key"
+#   ca_cert: "proxy-serv-ca.crt"
+#   cert_gen: "gen_cert.sh"
