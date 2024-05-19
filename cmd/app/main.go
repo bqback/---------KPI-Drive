@@ -4,6 +4,7 @@ import (
 	"log"
 	"messagequeue/internal/config"
 	"messagequeue/internal/logging"
+	"messagequeue/internal/sender"
 )
 
 const envPath = "config/.env"
@@ -21,4 +22,6 @@ func main() {
 		logger.Fatal(err.Error())
 	}
 	logger.Info("Logger configured")
+
+	sender := sender.NewFactSender(config.App, &logger)
 }
