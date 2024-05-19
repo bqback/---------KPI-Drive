@@ -1,0 +1,30 @@
+name: App CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  composite-ci:
+    # Линтер и сборка запускаются в одной джобе, чтобы не ждать каждый раз установки библиотек
+    name: Lint, build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          cache: false
+          go-version: '1.22'
+      
+      - name: Run linter
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest
+
+      - name: Build the binary
+        run: go build -o main ./cmd/app/main.go
