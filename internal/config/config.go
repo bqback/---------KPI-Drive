@@ -15,9 +15,10 @@ type Config struct {
 }
 
 type AppConfig struct {
-	SaveURL string
-	GetURL  string
-	Token   string
+	SaveURL    string
+	GetURL     string
+	Token      string
+	AuthUserID string
 }
 
 type LoggingConfig struct {
@@ -64,9 +65,15 @@ func LoadConfig(envPath string, configPath string) (*Config, error) {
 		return nil, err
 	}
 
+	id, err := GetAuthUserID()
+	if err != nil {
+		return nil, err
+	}
+
 	config.App.SaveURL = saveURL
 	config.App.GetURL = getURL
 	config.App.Token = token
+	config.App.AuthUserID = id
 
 	return &config, nil
 }
@@ -93,4 +100,12 @@ func GetBearerToken() (string, error) {
 		return token, apperrors.ErrBearerTokenMissing
 	}
 	return token, nil
+}
+
+func GetAuthUserID() (string, error) {
+	id, ok := os.LookupEnv("USER_ID")
+	if !ok {
+		return id, apperrors.ErrAuthUserIDMissing
+	}
+	return id, nil
 }

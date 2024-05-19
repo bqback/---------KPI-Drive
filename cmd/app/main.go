@@ -3,8 +3,11 @@ package main
 import (
 	"log"
 	"messagequeue/internal/config"
+	"messagequeue/internal/generator"
 	"messagequeue/internal/logging"
+	"messagequeue/internal/pkg/entities"
 	"messagequeue/internal/sender"
+	"time"
 )
 
 const envPath = "config/.env"
@@ -24,4 +27,17 @@ func main() {
 	logger.Info("Logger configured")
 
 	sender := sender.NewFactSender(config.App, &logger)
+
+	preset := entities.GeneratorPreset{
+		PeriodStart: time.Date(2005, 8, 1, 0, 0, 0, 0, nil).String(),
+		PeriodEnd:   time.Date(2005, 8, 30, 0, 0, 0, 0, nil).String(),
+		PeriodKey:   "month",
+		MoID:        "999999",
+		IsPlan:      "0",
+		AuthUserID:  config.App.AuthUserID,
+	}
+
+	facts := generator.GenerateFacts(2000, preset)
+
+	sender.Process(facts)
 }

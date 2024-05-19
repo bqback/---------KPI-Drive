@@ -12,3 +12,12 @@ type Fact struct {
 	AuthUserID  string
 	Comment     string
 }
+
+type GeneratorPreset struct {
+	PeriodStart string
+	PeriodEnd   string
+	PeriodKey   string
+	MoID        string
+	IsPlan      string
+	AuthUserID  string
+}

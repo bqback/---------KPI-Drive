@@ -7,6 +7,7 @@ var (
 	ErrSaveURLMissing     = errors.New("save fact URL missing from .env file")
 	ErrGetURLMissing      = errors.New("get facts URL missing from .env file")
 	ErrBearerTokenMissing = errors.New("bearer token missing from .env file")
+	ErrAuthUserIDMissing  = errors.New("auth user id missing from .env file")
 )
 
 var (
