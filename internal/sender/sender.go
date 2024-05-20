@@ -17,6 +17,7 @@ import (
 type Sender struct {
 	saveURL     string
 	token       string
+	userID      string
 	logger      logging.ILogger
 	client      *http.Client
 	maxRequests int
@@ -26,6 +27,7 @@ func NewFactSender(config *config.AppConfig, logger logging.ILogger) *Sender {
 	return &Sender{
 		saveURL:     config.SaveURL,
 		token:       config.Token,
+		userID:      config.AuthUserID,
 		client:      &http.Client{},
 		logger:      logger,
 		maxRequests: config.MaxRequests,
@@ -77,7 +79,7 @@ func (s *Sender) doRequest(wg *sync.WaitGroup, requests chan *http.Request, sem 
 			if resp.Status == "OK" {
 				s.logger.Debug(fmt.Sprintf("Response fact ID %d", resp.Data["indicator_to_mo_fact_id"]))
 			} else {
-				s.logger.Debug(fmt.Sprintf("Server returned error: %v", resp.Messages.Error))
+				s.logger.Debug(fmt.Sprintf("Server returned error: %v", *resp.Messages.Error))
 			}
 
 			<-sem
@@ -101,7 +103,7 @@ func (s *Sender) formRequest(wg *sync.WaitGroup, fact entities.Fact, out chan *h
 		"value":                   strings.NewReader(fact.Value),
 		"fact_time":               strings.NewReader(fact.FactTime),
 		"is_plan":                 strings.NewReader(fact.IsPlan),
-		"auth_user_id":            strings.NewReader(fact.AuthUserID),
+		"auth_user_id":            strings.NewReader(s.userID),
 		"comment":                 strings.NewReader(fact.Comment),
 	}
 	var body bytes.Buffer
