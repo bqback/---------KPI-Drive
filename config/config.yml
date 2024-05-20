@@ -9,11 +9,11 @@ app:
     facts: 10
     # Данные из задания
     period_start: "2024-05-01"
-	  period_end: "2024-05-31"
-	  period_key: "month"
-	  mo_id: "227373"
-	  mo_fact_id: "0"
-	  is_plan: "0"
+    period_end: "2024-05-31"
+    period_key: "month"
+    mo_id: "227373"
+    mo_fact_id: "0"
+    is_plan: "0"
 
 logging:
   # Accepted levels: trace, debug, info, warning, error
